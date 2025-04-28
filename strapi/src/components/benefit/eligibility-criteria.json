@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_benefit_eligibility_criteria",
+  "info": {
+    "displayName": "Eligibility Criteria",
+    "description": "Specific eligibility criteria"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "condition": {
+      "type": "string",
+      "required": true
+    },
+    "conditionValues": {
+      "type": "json",
+      "required": true
+    }
+  }
+} 

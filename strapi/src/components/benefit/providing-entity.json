@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_benefit_providing_entities",
+  "info": {
+    "displayName": "Providing Entity",
+    "description": "Entity providing the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["government", "private", "individual"],
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "component",
+      "component": "benefit.address",
+      "required": true
+    },
+    "department": {
+      "type": "string",
+      "required": true
+    },
+    "contactInfo": {
+      "type": "component",
+      "component": "benefit.contact-info",
+      "required": true
+    }
+  }
+} 

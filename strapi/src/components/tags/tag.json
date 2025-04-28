@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_tags_tags",
+  "info": {
+    "displayName": "Tag",
+    "description": "Tags to help categorize or filter the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 

@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_benefit_documents",
+  "info": {
+    "displayName": "Document",
+    "description": "Required documents for the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "documentType": {
+      "type": "enumeration",
+      "enum": [
+        "identityProof",
+        "disablityProof",
+        "hostelerProof",
+        "incomeProof",
+        "domicileProof",
+        "marksProof"
+      ],
+      "required": true
+    },
+    "isRequired": {
+      "type": "boolean",
+      "required": true
+    },
+    "allowedProofs": {
+      "type": "json",
+      "required": true
+    }
+  }
+} 

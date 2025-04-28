@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_benefit_non_monetary_benefits",
+  "info": {
+    "displayName": "Non-Monetary Benefit",
+    "description": "Non-monetary benefits provided"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["non-monetary"],
+      "default": "non-monetary",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "description_md": {
+      "type": "text"
+    }
+  }
+} 

@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_benefit_references",
+  "info": {
+    "displayName": "Reference",
+    "description": "References for the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 

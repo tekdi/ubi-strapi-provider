@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_benefit_application_processes",
+  "info": {
+    "displayName": "Application Process",
+    "description": "Application process details"
+  },
+  "options": {},
+  "attributes": {
+    "mode": {
+      "type": "string",
+      "required": true
+    },
+    "description_md": {
+      "type": "text",
+      "required": true
+    }
+  }
+} 

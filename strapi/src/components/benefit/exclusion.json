@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_benefit_exclusions",
+  "info": {
+    "displayName": "Exclusion",
+    "description": "Exclusions from the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "description_md": {
+      "type": "text"
+    }
+  }
+} 

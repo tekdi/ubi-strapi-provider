@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_benefit_eligibilities",
+  "info": {
+    "displayName": "Eligibility",
+    "description": "Eligibility criteria for the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["economical", "educational", "geographical", "personal"],
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "evidence": {
+      "type": "text",
+      "required": true
+    },
+    "criteria": {
+      "type": "component",
+      "component": "benefit.eligibility-criteria",
+      "required": true
+    },
+    "allowedProofs": {
+      "type": "json",
+      "required": true
+    }
+  }
+} 

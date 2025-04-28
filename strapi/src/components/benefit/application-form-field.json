@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_benefit_application_form_fields",
+  "info": {
+    "displayName": "Application Form Field",
+    "description": "Application form field details"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "required": {
+      "type": "boolean",
+      "required": true
+    },
+    "options": {
+      "type": "component",
+      "component": "benefit.field-option",
+      "repeatable": true
+    },
+    "multiple": {
+      "type": "boolean"
+    }
+  }
+} 

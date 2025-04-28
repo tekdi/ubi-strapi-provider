@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_benefit_financial_benefits",
+  "info": {
+    "displayName": "Financial Benefit",
+    "description": "Financial benefits provided"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["financial"],
+      "default": "financial",
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "description_md": {
+      "type": "text"
+    },
+    "minValue": {
+      "type": "string"
+    },
+    "maxValue": {
+      "type": "string"
+    }
+  }
+} 

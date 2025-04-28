@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_benefit_contact_infos",
+  "info": {
+    "displayName": "Contact Information",
+    "description": "Contact details"
+  },
+  "options": {},
+  "attributes": {
+    "phoneNumber": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    }
+  }
+} 

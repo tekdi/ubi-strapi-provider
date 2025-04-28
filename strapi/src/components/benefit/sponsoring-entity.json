@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_benefit_sponsoring_entities",
+  "info": {
+    "displayName": "Sponsoring Entity",
+    "description": "Entity sponsoring the benefit"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": ["government", "private", "individual"],
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "component",
+      "component": "benefit.address",
+      "required": true
+    },
+    "department": {
+      "type": "string",
+      "required": true
+    },
+    "contactInfo": {
+      "type": "component",
+      "component": "benefit.contact-info",
+      "required": true
+    },
+    "sponsorShare": {
+      "type": "string",
+      "required": true
+    }
+  }
+} 
