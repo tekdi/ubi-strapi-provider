@@ -1,16 +1,16 @@
 # A) How base Strapi Project was setup in this repo?
 
-## Use node 18
+## 1. Use node 18
 ```
 nvm use 18;
 ```
 
-## Create strapi project
+## 2. Create strapi project
 ```
 npx create-strapi@5.12.6 strapi
 ```
 
-## Strapi project was initilized with these options
+## 3. Strapi project was initilized with these options
 ```
 ? Please log in or sign up. Skip
 
@@ -38,28 +38,28 @@ npx create-strapi@5.12.6 strapi
 ? Initialize a git repository? No
 ```
 
-## Open strapi admin URL, create admin account, login
+## 4. Open strapi admin URL, create admin account, login
 
-## Create custom collection
+## 5. Create custom collection
 Later, a custom collection was created using Strapi admin UI. The files generated for custom collection were added to git repo
 
-## Reference docs used
+## 6. Reference docs used
 - https://docs.strapi.io/cms/quick-start
 - https://docs.strapi.io/cms/installation/docker
 
 
 # B) Running Strappi locally without docker
-## Start postgres database on docker
+## 1. Start postgres database on docker
 ```docker-compose up postgres -d```
 
-##
+## 2. Do one time strapi npm pkg installations
 ```
 cd strapi;
 nvm use 18;
 npm install;
 ```
 
-## Update .env as needed to update DB details
+## 3. Update .env as needed to update DB details
 ```
 nano .env
 ```
@@ -71,7 +71,7 @@ npm run dev
 
 
 # C) Running Strappi locally with docker
-## Update .env for docker
+## 1. Update .env for docker
 Example .env
 
 ```
@@ -98,17 +98,17 @@ PGADMIN_DEFAULT_EMAIL=
 PGADMIN_DEFAULT_PASSWORD=
 ```
 
-## Start postgres, pgadmin database on docker
+## 2. Start postgres, pgadmin database on docker
 ```
 docker-compose up postgres pgadmin -d
 ```
 
-## Build Strapi image locally
+## 3. Build Strapi image locally
 ```
 docker-compose build --no-cache strapi 
 ```
 
-## Start Strapi service on docker
+## 4. Start Strapi service on docker
 ```
 docker-compose up strapi -d
 ```
