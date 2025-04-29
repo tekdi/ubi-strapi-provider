@@ -1,0 +1,73 @@
+services:
+  strapi:
+    container_name: strapi
+    build: .
+    image: strapi:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Strapi DB
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      
+      # Strapi Secrets
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      
+      # Strapi Misc
+      NODE_ENV: ${NODE_ENV}
+      STRAPI_TELEMETRY_DISABLED: true
+    volumes:
+      - ./strapi/public/uploads:/opt/app/public/uploads
+      - strapi_npm_cache:/home/node/.npm
+      - strapi_node_modules:/opt/app/node_modules
+      - strapi_build:/opt/app/build
+    ports:
+      - "1337:1337"
+    networks:
+      - strapi_nw
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14.17
+    container_name: strapi-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - strapi_pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - strapi_nw
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "8082:80"
+    networks:
+      - strapi_nw
+
+volumes:
+  strapi_pg_data:
+  strapi_node_modules:
+  strapi_build:
+  strapi_npm_cache:
+
+networks:
+  strapi_nw:
+    name: strapi
+    driver: bridge
