@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-   Deploy_on_UBA:
+   deploy_strapi:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
