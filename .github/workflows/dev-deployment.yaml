@@ -1,0 +1,26 @@
+name: Deploy to DEV
+on:
+  push:
+    branches:
+      - main
+jobs:
+   Deploy_on_UBA:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - 
+      name: Deploy Strapi based Catalog Manager for Provider
+      uses: appleboy/ssh-action@master
+      with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |    
+               cd ${{ secrets.SSH_TARGET_DIR }}
+               if [ -f .env ]; then
+               rm .env
+               fi
+               echo '${{ secrets.DEV_ENV }}' > .env
+               ls -ltra
+               ./deploy.sh
