@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-04-28T10:47:31.491Z"
+    "x-generation-date": "2025-05-07T07:12:18.624Z"
   },
   "security": [
     {
@@ -863,14 +863,14 @@
               "benefit.financial-benefit"
             ]
           },
+          "title": {
+            "type": "string"
+          },
           "type": {
             "type": "string",
             "enum": [
               "financial"
             ]
-          },
-          "title": {
-            "type": "string"
           },
           "description": {
             "type": "string"
@@ -898,14 +898,14 @@
               "benefit.non-monetary-benefit"
             ]
           },
+          "title": {
+            "type": "string"
+          },
           "type": {
             "type": "string",
             "enum": [
               "non-monetary"
             ]
-          },
-          "title": {
-            "type": "string"
           },
           "description": {
             "type": "string"
@@ -935,10 +935,10 @@
           "id": {
             "type": "number"
           },
-          "link": {
+          "title": {
             "type": "string"
           },
-          "title": {
+          "link": {
             "type": "string"
           }
         }
@@ -984,6 +984,9 @@
           "id": {
             "type": "number"
           },
+          "name": {
+            "type": "string"
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -991,9 +994,6 @@
               "private",
               "individual"
             ]
-          },
-          "name": {
-            "type": "string"
           },
           "address": {
             "$ref": "#/components/schemas/BenefitAddressComponent"
@@ -1012,6 +1012,9 @@
           "id": {
             "type": "number"
           },
+          "name": {
+            "type": "string"
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -1019,9 +1022,6 @@
               "private",
               "individual"
             ]
-          },
-          "name": {
-            "type": "string"
           },
           "address": {
             "$ref": "#/components/schemas/BenefitAddressComponent"
@@ -1047,7 +1047,13 @@
             "type": "string"
           },
           "condition": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "equals",
+              "greater than equals",
+              "less than equals",
+              "in"
+            ]
           },
           "conditionValues": {}
         }
@@ -1058,19 +1064,20 @@
           "id": {
             "type": "number"
           },
+          "evidence": {
+            "type": "string"
+          },
           "type": {
             "type": "string",
             "enum": [
-              "economical",
-              "educational",
-              "geographical",
-              "personal"
+              "academic",
+              "demographic",
+              "economic",
+              "health",
+              "misc"
             ]
           },
           "description": {
-            "type": "string"
-          },
-          "evidence": {
             "type": "string"
           },
           "criteria": {
@@ -1088,12 +1095,18 @@
           "documentType": {
             "type": "string",
             "enum": [
-              "identityProof",
-              "disablityProof",
-              "hostelerProof",
+              "associationProof",
+              "bankAccountProof",
+              "birthProof",
+              "casteProof",
+              "disabilityProof",
+              "feeProof",
+              "idProof",
               "incomeProof",
-              "domicileProof",
-              "marksProof"
+              "janAadhar",
+              "marksProof",
+              "participationProof",
+              "selfDeclarationProof"
             ]
           },
           "isRequired": {
@@ -1136,11 +1149,17 @@
           "id": {
             "type": "number"
           },
-          "type": {
-            "type": "string"
-          },
           "name": {
             "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "textarea",
+              "select",
+              "date"
+            ]
           },
           "label": {
             "type": "string"

@@ -6,13 +6,13 @@
   },
   "options": {},
   "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
     "type": {
       "type": "enumeration",
       "enum": ["government", "private", "individual"],
-      "required": true
-    },
-    "name": {
-      "type": "string",
       "required": true
     },
     "address": {

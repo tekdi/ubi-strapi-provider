@@ -6,16 +6,16 @@
   },
   "options": {},
   "attributes": {
+    "evidence": {
+      "type": "string",
+      "required": true
+    },
     "type": {
       "type": "enumeration",
-      "enum": ["economical", "educational", "geographical", "personal"],
+      "enum": ["academic", "demographic", "economic", "health", "misc"],
       "required": true
     },
     "description": {
-      "type": "text",
-      "required": true
-    },
-    "evidence": {
       "type": "text",
       "required": true
     },

@@ -9,12 +9,18 @@
     "documentType": {
       "type": "enumeration",
       "enum": [
-        "identityProof",
-        "disablityProof",
-        "hostelerProof",
+        "associationProof",
+        "bankAccountProof",
+        "birthProof",
+        "casteProof",
+        "disabilityProof",
+        "feeProof",
+        "idProof",
         "incomeProof",
-        "domicileProof",
-        "marksProof"
+        "janAadhar",
+        "marksProof",
+        "participationProof",
+        "selfDeclarationProof"
       ],
       "required": true
     },

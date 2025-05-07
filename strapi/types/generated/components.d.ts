@@ -26,7 +26,8 @@ export interface BenefitApplicationFormField extends Struct.ComponentSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     options: Schema.Attribute.Component<'benefit.field-option', true>;
     required: Schema.Attribute.Boolean & Schema.Attribute.Required;
-    type: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['text', 'textarea', 'select', 'date']> &
+      Schema.Attribute.Required;
   };
 }
 
@@ -64,12 +65,18 @@ export interface BenefitDocument extends Struct.ComponentSchema {
     allowedProofs: Schema.Attribute.JSON & Schema.Attribute.Required;
     documentType: Schema.Attribute.Enumeration<
       [
-        'identityProof',
-        'disablityProof',
-        'hostelerProof',
+        'associationProof',
+        'bankAccountProof',
+        'birthProof',
+        'casteProof',
+        'disabilityProof',
+        'feeProof',
+        'idProof',
         'incomeProof',
-        'domicileProof',
+        'janAadhar',
         'marksProof',
+        'participationProof',
+        'selfDeclarationProof',
       ]
     > &
       Schema.Attribute.Required;
@@ -91,9 +98,9 @@ export interface BenefitEligibility extends Struct.ComponentSchema {
     > &
       Schema.Attribute.Required;
     description: Schema.Attribute.Text & Schema.Attribute.Required;
-    evidence: Schema.Attribute.Text & Schema.Attribute.Required;
+    evidence: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<
-      ['economical', 'educational', 'geographical', 'personal']
+      ['academic', 'demographic', 'economic', 'health', 'misc']
     > &
       Schema.Attribute.Required;
   };
@@ -106,7 +113,10 @@ export interface BenefitEligibilityCriteria extends Struct.ComponentSchema {
     displayName: 'Eligibility Criteria';
   };
   attributes: {
-    condition: Schema.Attribute.String & Schema.Attribute.Required;
+    condition: Schema.Attribute.Enumeration<
+      ['equals', 'greater than equals', 'less than equals', 'in']
+    > &
+      Schema.Attribute.Required;
     conditionValues: Schema.Attribute.JSON & Schema.Attribute.Required;
     name: Schema.Attribute.String & Schema.Attribute.Required;
   };

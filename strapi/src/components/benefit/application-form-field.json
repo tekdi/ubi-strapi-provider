@@ -6,12 +6,13 @@
   },
   "options": {},
   "attributes": {
-    "type": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "name": {
-      "type": "string",
+    "type": {
+      "type": "enumeration",
+      "enum": ["text", "textarea", "select", "date"],
       "required": true
     },
     "label": {
