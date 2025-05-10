@@ -10,7 +10,7 @@
       "type": "string",
       "required": true
     },
-    "description_md": {
+    "description": {
       "type": "text",
       "required": true
     }
