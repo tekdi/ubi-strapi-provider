@@ -211,6 +211,12 @@
           "localized": true
         }
       }
+    },
+    "benefitCalculationRules": {
+      "type": "component",
+      "component": "benefit.benefit-calculation-rule",
+      "repeatable": true,
+      "required": false
     }
   }
 }

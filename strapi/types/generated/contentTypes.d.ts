@@ -424,6 +424,10 @@ export interface ApiBenefitBenefit extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    benefitCalculationRules: Schema.Attribute.Component<
+      'benefit.benefit-calculation-rule',
+      true
+    >;
     benefits: Schema.Attribute.DynamicZone<
       ['benefit.financial-benefit', 'benefit.non-monetary-benefit']
     > &

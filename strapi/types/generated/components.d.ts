@@ -38,8 +38,30 @@ export interface BenefitApplicationProcess extends Struct.ComponentSchema {
     displayName: 'Application Process';
   };
   attributes: {
-    description_md: Schema.Attribute.Text & Schema.Attribute.Required;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
     mode: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface BenefitBenefitCalculationRule extends Struct.ComponentSchema {
+  collectionName: 'components_benefit_benefit_calculation_rules';
+  info: {
+    description: 'Defines rules to calculate benefit amounts based on form inputs';
+    displayName: 'Benefit Calculation Rule';
+  };
+  attributes: {
+    conditions: Schema.Attribute.JSON;
+    description: Schema.Attribute.Text;
+    fixedValue: Schema.Attribute.Integer;
+    formula: Schema.Attribute.String;
+    inputFields: Schema.Attribute.JSON;
+    lookupTable: Schema.Attribute.JSON;
+    outputField: Schema.Attribute.String & Schema.Attribute.Required;
+    ruleId: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      ['fixed', 'lookup', 'conditional', 'formula']
+    > &
+      Schema.Attribute.Required;
   };
 }
 
@@ -250,6 +272,7 @@ declare module '@strapi/strapi' {
       'benefit.address': BenefitAddress;
       'benefit.application-form-field': BenefitApplicationFormField;
       'benefit.application-process': BenefitApplicationProcess;
+      'benefit.benefit-calculation-rule': BenefitBenefitCalculationRule;
       'benefit.contact-info': BenefitContactInfo;
       'benefit.document': BenefitDocument;
       'benefit.eligibility': BenefitEligibility;

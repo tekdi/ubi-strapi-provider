@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_benefit_benefit_calculation_rules",
+  "info": {
+    "displayName": "Benefit Calculation Rule",
+    "description": "Defines rules to calculate benefit amounts based on form inputs"
+  },
+  "options": {},
+  "attributes": {
+    "ruleId": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "fixed",
+        "lookup",
+        "conditional",
+        "formula"
+      ],
+      "required": true
+    },
+    "outputField": {
+      "type": "string",
+      "required": true
+    },
+    "inputFields": {
+      "type": "json"
+    },
+    "fixedValue": {
+      "type": "integer"
+    },
+    "lookupTable": {
+      "type": "json"
+    },
+    "conditions": {
+      "type": "json"
+    },
+    "formula": {
+      "type": "string"
+    }
+  }
+}

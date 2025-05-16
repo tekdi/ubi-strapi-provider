@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-05-07T07:12:18.624Z"
+    "x-generation-date": "2025-05-16T06:56:38.016Z"
   },
   "security": [
     {
@@ -191,6 +191,12 @@
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/BenefitApplicationFormFieldComponent"
+                }
+              },
+              "benefitCalculationRules": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BenefitBenefitCalculationRuleComponent"
                 }
               },
               "locale": {
@@ -371,6 +377,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BenefitApplicationFormFieldComponent"
+            }
+          },
+          "benefitCalculationRules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BenefitBenefitCalculationRuleComponent"
             }
           },
           "createdAt": {
@@ -773,6 +785,12 @@
                     "$ref": "#/components/schemas/BenefitApplicationFormFieldComponent"
                   }
                 },
+                "benefitCalculationRules": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BenefitBenefitCalculationRuleComponent"
+                  }
+                },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
@@ -1124,7 +1142,7 @@
           "mode": {
             "type": "string"
           },
-          "description_md": {
+          "description": {
             "type": "string"
           }
         }
@@ -1175,6 +1193,41 @@
           },
           "multiple": {
             "type": "boolean"
+          }
+        }
+      },
+      "BenefitBenefitCalculationRuleComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "ruleId": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixed",
+              "lookup",
+              "conditional",
+              "formula"
+            ]
+          },
+          "outputField": {
+            "type": "string"
+          },
+          "inputFields": {},
+          "fixedValue": {
+            "type": "integer"
+          },
+          "lookupTable": {},
+          "conditions": {},
+          "formula": {
+            "type": "string"
           }
         }
       },
