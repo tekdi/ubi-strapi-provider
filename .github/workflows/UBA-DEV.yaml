@@ -9,7 +9,7 @@ jobs:
   deploy_strapi:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: UBA-DEV  
+    environment: UBA-DEV
     steps:
       - name: Deploy Strapi based Catalog Manager for Provider
         uses: appleboy/ssh-action@master
@@ -18,11 +18,11 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: |    
+          script: |
             cd ${{ secrets.SSH_TARGET_DIR }}
             if [ -f .env ]; then
               rm .env
             fi
-            echo "${{ secrets.ENV_FILE }}" > .env 
+            echo "${{ secrets.ENV_FILE }}" > .env
             ls -ltra
             ./deploy.sh
