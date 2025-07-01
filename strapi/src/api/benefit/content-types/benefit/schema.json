@@ -202,7 +202,7 @@
     },
     "applicationForm": {
       "type": "component",
-      "component": "benefit.application-form-field",
+      "component": "benefit.application-form-group",
       "repeatable": true,
       "required": true,
       "min": 1,

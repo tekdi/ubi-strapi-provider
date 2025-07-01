@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_benefit_application_form_groups",
+  "info": {
+    "displayName": "Application Form Group",
+    "description": "Group of application form fields with a legend"
+  },
+  "options": {},
+  "attributes": {
+    "fieldsGroupName": {
+      "type": "string",
+      "required": false,
+      "placeholder": "Fields Group Name eg: personal"
+    },
+    "fieldsGroupLabel": {
+      "type": "string",
+      "required": false,
+      "placeholder": "Fields Group Label eg: Personal Information"
+    },
+    "fields": {
+      "type": "component",
+      "component": "benefit.application-form-field",
+      "repeatable": true,
+      "required": false
+    }
+  }
+} 
