@@ -1,0 +1,32 @@
+name: Build and Push to GHCR
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: UBA-DEV
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and Push Docker image
+        env:
+          IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/ubi-strapi-provider:latest
+        run: |
+          docker build -t ubi-strapi-provider .
+          docker tag ubi-strapi-provider $IMAGE_NAME
+          docker push $IMAGE_NAME
+          echo "$IMAGE_NAME" > image.txt
+
+      - name: Upload image URI
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-uri
+          path: image.txt
