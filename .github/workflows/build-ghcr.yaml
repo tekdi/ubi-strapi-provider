@@ -25,16 +25,16 @@ jobs:
           docker push $IMAGE_NAME
           echo "$IMAGE_NAME" > image.txt
 
-      - name: Make image public
-        env:
-          GHCR_PAT_TOKEN: ${{ secrets.GHCR_PAT_TOKEN }}
-        run: |
-          echo "$GHCR_PAT_TOKEN" | gh auth login --with-token
-          gh api \
-            --method PATCH \
-            -H "Accept: application/vnd.github+json" \
-            /orgs/tekdi/packages/container/ubi-strapi-provider/visibility \
-            -f visibility=public
+      # - name: Make image public
+      #   env:
+      #     GHCR_PAT_TOKEN: ${{ secrets.GHCR_PAT_TOKEN }}
+      #   run: |
+      #     echo "$GHCR_PAT_TOKEN" | gh auth login --with-token
+      #     gh api \
+      #       --method PATCH \
+      #       -H "Accept: application/vnd.github+json" \
+      #       /orgs/tekdi/packages/container/ubi-strapi-provider/visibility \
+      #       -f visibility=public
 
       - name: Upload image URI
         uses: actions/upload-artifact@v4
