@@ -12,19 +12,44 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Required to get git tags
+
+      - name: Get latest tag and bump patch version
+        id: version
+        run: |
+          # Get latest tag (e.g., v1.0.3)
+          latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          echo "Latest tag: $latest_tag"
+
+          # Extract version numbers
+          version=${latest_tag#v}
+          major=$(echo "$version" | cut -d. -f1)
+          minor=$(echo "$version" | cut -d. -f2)
+          patch=$(echo "$version" | cut -d. -f3)
+
+          # Increment patch version
+          new_patch=$((patch + 1))
+          new_tag="v$major.$minor.$new_patch"
+          echo "New tag: $new_tag"
+
+          echo "tag=$new_tag" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GHCR
         run: echo "${{ secrets.GHCR_PAT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build and Push Docker image
         env:
-          IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/ubi-strapi-provider:latest
+          IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/ubi-strapi-provider
+          TAG: ${{ steps.version.outputs.tag }}
         run: |
-          docker build -t ubi-strapi-provider .
-          docker tag ubi-strapi-provider $IMAGE_NAME
-          docker push $IMAGE_NAME
-          echo "$IMAGE_NAME" > image.txt
+          docker build -t $IMAGE_NAME:$TAG .
+          docker tag $IMAGE_NAME:$TAG $IMAGE_NAME:latest
+          docker push $IMAGE_NAME:$TAG
+          docker push $IMAGE_NAME:latest
+          echo "$IMAGE_NAME:$TAG" > image.txt
 
+      # Optional: Make image public
       # - name: Make image public
       #   env:
       #     GHCR_PAT_TOKEN: ${{ secrets.GHCR_PAT_TOKEN }}
