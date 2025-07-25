@@ -18,7 +18,7 @@ jobs:
 
       - name: Build and Push Docker image
         env:
-          IMAGE_NAME: ghcr.io/tekdiashwini/ubi-strapi-provider:latest
+          IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/ubi-strapi-provider:latest
         run: |
           docker build -t ubi-strapi-provider .
           docker tag ubi-strapi-provider $IMAGE_NAME
