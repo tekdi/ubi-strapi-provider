@@ -392,7 +392,7 @@ export interface ApiBenefitBenefit extends Struct.CollectionTypeSchema {
         };
       }>;
     applicationForm: Schema.Attribute.Component<
-      'benefit.application-form-field',
+      'benefit.application-form-group',
       true
     > &
       Schema.Attribute.Required &

@@ -31,6 +31,19 @@ export interface BenefitApplicationFormField extends Struct.ComponentSchema {
   };
 }
 
+export interface BenefitApplicationFormGroup extends Struct.ComponentSchema {
+  collectionName: 'components_benefit_application_form_groups';
+  info: {
+    description: 'Group of application form fields with a legend';
+    displayName: 'Application Form Group';
+  };
+  attributes: {
+    fields: Schema.Attribute.Component<'benefit.application-form-field', true>;
+    fieldsGroupLabel: Schema.Attribute.String;
+    fieldsGroupName: Schema.Attribute.String;
+  };
+}
+
 export interface BenefitApplicationProcess extends Struct.ComponentSchema {
   collectionName: 'components_benefit_application_processes';
   info: {
@@ -271,6 +284,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'benefit.address': BenefitAddress;
       'benefit.application-form-field': BenefitApplicationFormField;
+      'benefit.application-form-group': BenefitApplicationFormGroup;
       'benefit.application-process': BenefitApplicationProcess;
       'benefit.benefit-calculation-rule': BenefitBenefitCalculationRule;
       'benefit.contact-info': BenefitContactInfo;
