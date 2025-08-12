@@ -20,7 +20,8 @@
         "janAadhar",
         "marksProof",
         "participationProof",
-        "selfDeclarationProof"
+        "selfDeclarationProof",
+        "stampDutyProof"
       ],
       "required": true
     },
