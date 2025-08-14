@@ -19,9 +19,6 @@
       "type": "string",
       "required": true,
       "unique": true,
-      "column": {
-        "unique": true
-      },
       "pluginOptions": {
         "i18n": {
           "localized": true
