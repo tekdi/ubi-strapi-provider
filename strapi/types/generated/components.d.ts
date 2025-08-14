@@ -112,6 +112,7 @@ export interface BenefitDocument extends Struct.ComponentSchema {
         'marksProof',
         'participationProof',
         'selfDeclarationProof',
+        'stampDutyProof',
       ]
     > &
       Schema.Attribute.Required;
