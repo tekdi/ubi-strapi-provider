@@ -48,7 +48,7 @@ async function checkDuplicateWithExclusion(title, locale, currentDocumentId) {
     where: {
       title,
       ...(locale ? { locale } : {}),
-      documentId: { $ne: currentDocumentId },
+      ...(currentDocumentId != null ? { documentId: { $ne: currentDocumentId } } : {}),
     },
     select: ['id'],
   });
@@ -65,7 +65,7 @@ async function checkBasicDuplicate(title, locale) {
       title,
       ...(locale ? { locale } : {}),
     },
-    select: ['id', 'documentId', 'document_id', 'title'],
+    select: ['id'],
   });
 
   if (existing) {
@@ -112,9 +112,7 @@ async function validateUniqueTitle(event, isUpdate = false) {
     }
   }
 
-  if (!needsExclusion) {
-    await checkBasicDuplicate(title, locale);
-  }
+  await checkBasicDuplicate(title, locale);
 }
 
 export default {
