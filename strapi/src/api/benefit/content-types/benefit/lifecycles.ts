@@ -2,9 +2,10 @@ import { errors } from '@strapi/utils';
 
 const { ApplicationError } = errors;
 
-async function getLocale(data) {
+async function getLocale(data, isUpdate = false) {
   let locale = data?.locale as string | undefined;
-  if (!locale && strapi.plugin) {
+  // If locale isn't provided in payload (and not resolved from DB during updates), attempt to use default locale
+  if (!locale && !isUpdate && strapi.plugin) {
     try {
       const i18nLocalesService = strapi.plugin('i18n')?.service('locales');
       if (i18nLocalesService?.getDefaultLocale) {
@@ -24,44 +25,37 @@ async function getCurrentDocumentId(data, where, isUpdate) {
       try {
         const currentRecord = await strapi.db.query('api::benefit.benefit').findOne({
           where: { id: where.id },
-          select: ['documentId', 'document_id'],
+          select: ['documentId', 'locale'],
         });
-        currentDocumentId = currentRecord?.documentId || currentRecord?.document_id;
-        console.log('Fetched documentId for record id', where.id, ':', currentDocumentId);
+
+        currentDocumentId = currentRecord?.documentId;
+        if (!data?.locale && currentRecord?.locale) {
+          data.locale = currentRecord.locale;
+        }
+        strapi.log.debug(`Fetched documentId for record id ${where.id}: ${currentDocumentId}`);
       } catch (error) {
-        console.log('Error fetching documentId:', error);
+        strapi.log.warn('Error fetching documentId', error);
       }
     }
-    console.log('Update operation - current documentId:', currentDocumentId);
+    strapi.log.debug(`Update operation - current documentId: ${currentDocumentId}`);
     return currentDocumentId;
   }
   return data?.documentId;
 }
 
 async function checkDuplicateWithExclusion(title, locale, currentDocumentId) {
-  const recordsWithSameTitle = await strapi.db.query('api::benefit.benefit').findMany({
-    where: { 
+  const existing = await strapi.db.query('api::benefit.benefit').findOne({
+    where: {
       title,
       ...(locale ? { locale } : {}),
+      documentId: { $ne: currentDocumentId },
     },
-    select: ['id', 'documentId', 'document_id', 'title', 'published_at'],
+    select: ['id'],
   });
 
-  console.log('All records with same title:', JSON.stringify(recordsWithSameTitle, null, 2));
-
-  const duplicateFromDifferentDocument = recordsWithSameTitle.find(record => {
-    const recordDocumentId = record.documentId || record.document_id;
-    return recordDocumentId && recordDocumentId !== currentDocumentId;
-  });
-
-  if (duplicateFromDifferentDocument) {
-    console.log('Found duplicate from different document:', duplicateFromDifferentDocument);
+  if (existing) {
     const message = `A benefit with the title "${title}" already exists. Please choose a different title.`;
-    throw new ApplicationError(message, {
-      title: 'Duplicate title',
-    });
-  } else {
-    console.log('No duplicates from different documents found - allowing operation');
+    throw new ApplicationError(message, { title: 'Duplicate title' });
   }
 }
 
@@ -85,17 +79,25 @@ async function checkBasicDuplicate(title, locale) {
 async function validateUniqueTitle(event, isUpdate = false) {
   const { data, where } = event.params;
 
-  const rawTitle = data?.title;
-  if (!rawTitle || typeof rawTitle !== 'string') {
-    return;
+  // Resolve title from payload or DB (for update/publish when title isn't sent)
+  let title: string | undefined =
+    typeof data?.title === 'string' ? data.title.trim() : undefined;
+  if (!title && (isUpdate || data?.documentId) && where?.id) {
+    const record = await strapi.db.query('api::benefit.benefit').findOne({
+      where: { id: where.id },
+      select: ['title', 'locale'],
+    });
+    title = record?.title?.trim();
+    // Hydrate locale from DB so locale-scoped duplicate checks are accurate
+    if (!data?.locale && record?.locale) {
+      data.locale = record.locale;
+    }
   }
-
-  const title = rawTitle.trim();
   if (!title) {
     return;
   }
 
-  const locale = await getLocale(data);
+  const locale = await getLocale(data, isUpdate);
 
   const isPublishOperation = !isUpdate && data?.documentId;
   const needsExclusion = isUpdate || isPublishOperation;
@@ -106,7 +108,7 @@ async function validateUniqueTitle(event, isUpdate = false) {
       await checkDuplicateWithExclusion(title, locale, currentDocumentId);
       return;
     } else {
-      console.log('WARNING: No documentId found for exclusion - falling back to basic check');
+      strapi.log.warn('WARNING: No documentId found for exclusion - falling back to basic check');
     }
   }
 
